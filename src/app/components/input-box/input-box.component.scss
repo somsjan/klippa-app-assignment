@@ -1,0 +1,9 @@
+.input-box {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 16px;
+    padding-bottom: 1em;
+  }
+}

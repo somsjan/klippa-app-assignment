@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { DocumentListComponent } from "../../components/document-list/document-list.component";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,14 +7,13 @@ import { DocumentListComponent } from "../../components/document-list/document-l
 })
 export class DashboardPage {
 
-  @ViewChild(DocumentListComponent)
-  documentListComponent: DocumentListComponent | undefined;
+  public showAddDocumentComponent: boolean = true;
 
   constructor() {
   }
 
   public onAdd() {
-    this.documentListComponent?.getDocumentList();
+    this.showAddDocumentComponent = !this.showAddDocumentComponent;
   }
 
 }
