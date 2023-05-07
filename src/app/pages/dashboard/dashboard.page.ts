@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class DashboardPage {
 
-  public showAddDocumentComponent: boolean = true;
+  public showAddDocumentComponent: boolean = false;
 
   constructor() {
   }
