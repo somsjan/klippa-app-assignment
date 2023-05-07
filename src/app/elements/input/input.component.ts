@@ -13,4 +13,7 @@ export class InputComponent {
   @Input()
   placeholder: string;
 
+  @Input()
+  readonly: boolean = false;
+
 }

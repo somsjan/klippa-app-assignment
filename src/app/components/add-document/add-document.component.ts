@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { DocumentModel } from "../../models/document.model";
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FinancialFullService } from "../../services/financialFull.service";
 
 @Component({
   selector: 'app-add-document',
@@ -8,11 +8,29 @@ import { DocumentModel } from "../../models/document.model";
 })
 export class AddDocumentComponent {
 
-  public newDocument: DocumentModel = {
-    description: '',
-  };
+  @Output()
+  readonly afterUpload = new EventEmitter();
 
-  constructor() {
+  public fileName = '';
+  public selectedFile: File;
+
+  constructor(
+    private parseDocumentService: FinancialFullService,
+  ) {
+  }
+
+  public onFileSelected(event) {
+    const file:File = event.target.files[0];
+
+    if (file) {
+      this.fileName = file.name;
+      this.selectedFile = file;
+    }
+  }
+
+  public async startUpload() {
+    await this.parseDocumentService.postDocument(this.selectedFile);
+    this.afterUpload.emit();
   }
 
 }

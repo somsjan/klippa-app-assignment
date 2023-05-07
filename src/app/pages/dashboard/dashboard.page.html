@@ -1,12 +1,13 @@
 <div>
 
-  <app-content-header headerText="My Klippa">
-    <app-button text="Add" (onClick)="onAdd()"></app-button>
-  </app-content-header>
+  <app-content-header headerText="My Klippa"></app-content-header>
 
   <app-content-body>
-    <app-add-document *ngIf="showAddDocumentComponent"></app-add-document>
-    <app-document-list></app-document-list>
+    <app-add-document (afterUpload)="documentList.getDocumentList()"></app-add-document>
+  </app-content-body>
+
+  <app-content-body>
+    <app-document-list #documentList></app-document-list>
   </app-content-body>
 
 </div>

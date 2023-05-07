@@ -1,2 +1,10 @@
-<h2 class="content-body-header">Add document</h2>
-<app-input-box labelText="Description" [value]="newDocument.description"></app-input-box>
+<div class="row">
+  <h2 class="content-body-header">Add document</h2>
+  <app-button text="Select file" (onClick)="fileUpload.click()"></app-button>
+  <input type="file" accept="image/png, image/jpeg, .pdf" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+</div>
+
+<div class="row" *ngIf="fileName">
+  <app-input-box labelText="File" [value]="fileName" [readonly]="true"></app-input-box>
+  <app-button class="upload-button" text="Start upload" (onClick)="startUpload()"></app-button>
+</div>

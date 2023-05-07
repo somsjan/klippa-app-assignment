@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-input-box',
@@ -12,5 +12,8 @@ export class InputBoxComponent {
 
   @Input()
   value: string;
+
+  @Input()
+  readonly: boolean;
 
 }

@@ -7,13 +7,7 @@ import { Component } from '@angular/core';
 })
 export class DashboardPage {
 
-  public showAddDocumentComponent: boolean = false;
-
   constructor() {
-  }
-
-  public onAdd() {
-    this.showAddDocumentComponent = !this.showAddDocumentComponent;
   }
 
 }

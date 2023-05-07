@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FinancialFullService } from "../../services/financialFull.service";
 
 @Component({
   selector: 'app-document-list',
@@ -7,12 +8,19 @@ import { Component } from '@angular/core';
 })
 export class DocumentListComponent {
 
-  constructor() {
+  public isLoading: boolean = false;
+  public receiptList: any[] = [];
+
+  constructor(
+    private parseDocumentService: FinancialFullService,
+  ) {
     this.getDocumentList();
   }
 
-  public getDocumentList() {
-    console.log('get document list');
+  public async getDocumentList() {
+    this.isLoading = true;
+    await this.parseDocumentService.getReceipts();
+    this.isLoading = false;
   }
 
 }

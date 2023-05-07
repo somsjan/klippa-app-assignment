@@ -1,1 +1,6 @@
-<p>document-list works!</p>
+<div *ngFor="let receiptItem of receiptList">
+  receiptItem?.id
+</div>
+<div *ngIf="!receiptList.length && !isLoading">
+  No receipts found
+</div>
