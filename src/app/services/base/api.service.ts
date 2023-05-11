@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
+import { catchError, map, Observable } from "rxjs";
 
 export interface ApiRequestOptions {
   apiKey: string;
 }
 
-export class BaseService {
+export class ApiService {
 
   constructor(
     protected http: HttpClient,
@@ -13,17 +14,24 @@ export class BaseService {
 
   }
 
-  public postRequest(url: string, body: any, options: ApiRequestOptions): any {
+  public postRequest(url: string, body: any, options: ApiRequestOptions): Observable<any> {
     try {
       const fullUrl = this.getFullEndpointUrl(url);
-      const requestOptions = this.getRequestOptions(options);
-      return this.http.post(fullUrl, body, requestOptions);
+      const requestOptions = this.generateRequestOptions(options);
+      return this.http.post(fullUrl, body, requestOptions).pipe(
+        map((response: any) => response),
+        catchError((error) => {
+          this.httpErrorHandler(error);
+          throw error;
+        })
+      );
     } catch (e) {
       this.httpErrorHandler(e);
+      return undefined;
     }
   }
 
-  private getRequestOptions(options: ApiRequestOptions) {
+  private generateRequestOptions(options: ApiRequestOptions) {
     return {
       headers: new HttpHeaders({
         'X-Auth-Key': options.apiKey,
@@ -36,7 +44,7 @@ export class BaseService {
   }
 
   private httpErrorHandler(error: any) {
-    console.error('ErrorHandler', error.toString);
+    console.error('ErrorHandler: ', JSON.stringify(error));
   }
 
 }

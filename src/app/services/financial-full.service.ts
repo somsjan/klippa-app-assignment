@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
-import { ApiRequestOptions, BaseService } from "./base/base.service";
 import { HttpClient } from "@angular/common/http";
+import { firstValueFrom } from "rxjs";
+
+import { ApiRequestOptions, ApiService } from "./base/api.service";
 import { LocalStorageKey, LocalStorageService } from "./utility/local-storage.service";
 import { DocumentFinancialModel } from "../models/document-financial.model";
 
 @Injectable({
   providedIn: 'root',
 })
-export class FinancialFullService extends BaseService {
+export class FinancialFullService extends ApiService {
 
   protected baseUrl = 'parseDocument/financial_full';
   protected localStorageKey = LocalStorageKey.FINANCIAL_DOCUMENT_HISTORY;
@@ -21,12 +23,20 @@ export class FinancialFullService extends BaseService {
 
   public async postDocument(file: File, apiKey: string): Promise<any> {
     const formData = new FormData();
-    formData.append('document' , file);
+    formData.append('document', file);
 
     const requestOptions: ApiRequestOptions = { apiKey };
-    const { data } = await this.postRequest(this.baseUrl, formData, requestOptions).toPromise();
-    this.saveToHistory(data);
-    return data;
+
+    try {
+      const postObservable = this.postRequest(this.baseUrl, formData, requestOptions);
+      const result = await firstValueFrom(postObservable);
+      if (result && result.data) {
+        this.saveToHistory(result.data);
+        return result.data;
+      }
+    } catch (err) {
+      return null;
+    }
   }
 
   public getHistory(): DocumentFinancialModel[] {
