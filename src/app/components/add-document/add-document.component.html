@@ -1,14 +1,18 @@
 <div class="row">
   <h2 class="content-body-header">Add document</h2>
-  <app-button text="Select file" (onClick)="fileUpload.click()"></app-button>
+</div>
+
+<div class="row">
+  <app-input-box labelText="API key" [value]="apiKey" (onChange)="apiKey = $event"></app-input-box>
+  <app-button class="select-file-button" text="Select file" [disabled]="!apiKey" (onClick)="fileUpload.click()"></app-button>
   <input type="file" accept="image/png, image/jpeg, .pdf" class="file-input"
     (change)="onFileSelected($event)" #fileUpload>
 </div>
 
 <div class="row" *ngIf="selectedFile && selectedFile.name">
   <app-input-box labelText="File name" [value]="selectedFile.name" [disabled]="true"></app-input-box>
-  <app-input-box labelText="API key" [value]="apiKey" (onChange)="apiKey = $event"></app-input-box>
-  <app-button class="upload-button" text="Start upload" [disabled]="uploadIsDisabled()" (onClick)="startUpload()"></app-button>
+  <app-input-box labelText="File type" [value]="selectedFile.type" [disabled]="true"></app-input-box>
+  <app-button class="upload-button" text="Start upload" [disabled]="isProcessing" (onClick)="startUpload()"></app-button>
 </div>
 
 <div *ngIf="uploadFileResult">

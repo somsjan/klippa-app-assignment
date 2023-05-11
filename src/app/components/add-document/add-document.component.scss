@@ -3,6 +3,7 @@
 .row {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1em;
 
   .file-input {
     display: none;
@@ -11,6 +12,11 @@
   app-input-box {
     flex: 1;
     padding-right: 2.5em;
+  }
+
+  .select-file-button {
+    position: relative;
+    top: 2em;
   }
 
   .upload-button {

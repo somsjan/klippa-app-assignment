@@ -29,10 +29,6 @@ export class AddDocumentComponent {
     }
   }
 
-  public uploadIsDisabled(): boolean {
-    return this.isProcessing || !this.apiKey.length;
-  }
-
   public async startUpload() {
     this.isProcessing = true;
     this.uploadFileResult = await this.parseDocumentService.postDocument(this.selectedFile, this.apiKey);
