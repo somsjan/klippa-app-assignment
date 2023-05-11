@@ -10,7 +10,7 @@ import { DocumentFinancialModel } from "../../models/document-financial.model";
 export class AddDocumentComponent {
 
   public selectedFile: File;
-  public uploadedFile: Partial<DocumentFinancialModel>;
+  public uploadFileResult: DocumentFinancialModel;
   public apiKey: string = '';
 
   public isProcessing: boolean = false;
@@ -25,13 +25,17 @@ export class AddDocumentComponent {
 
     if (selectedFile) {
       this.selectedFile = selectedFile;
-      this.uploadedFile = undefined;
+      this.uploadFileResult = undefined;
     }
+  }
+
+  public uploadIsDisabled(): boolean {
+    return this.isProcessing || !this.apiKey.length;
   }
 
   public async startUpload() {
     this.isProcessing = true;
-    this.uploadedFile = await this.parseDocumentService.postDocument(this.selectedFile, this.apiKey);
+    this.uploadFileResult = await this.parseDocumentService.postDocument(this.selectedFile, this.apiKey);
     this.selectedFile = undefined;
     this.isProcessing = false;
   }

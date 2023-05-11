@@ -6,9 +6,13 @@
 </div>
 
 <div class="row" *ngIf="selectedFile && selectedFile.name">
-  <app-input-box labelText="File" [value]="selectedFile.name" [readonly]="true"></app-input-box>
+  <app-input-box labelText="File name" [value]="selectedFile.name" [disabled]="true"></app-input-box>
   <app-input-box labelText="API key" [value]="apiKey" (onChange)="apiKey = $event"></app-input-box>
-  <app-button class="upload-button" text="Start upload" [disabled]="isProcessing" (onClick)="startUpload()"></app-button>
+  <app-button class="upload-button" text="Start upload" [disabled]="uploadIsDisabled()" (onClick)="startUpload()"></app-button>
 </div>
 
-<app-document-item *ngIf="uploadedFile" [document]="uploadedFile"></app-document-item>
+<div *ngIf="uploadFileResult">
+  <h3>File successfully transferred!</h3>
+  <app-document-item [document]="uploadFileResult" [cssClass]="'success'"></app-document-item>
+</div>
+

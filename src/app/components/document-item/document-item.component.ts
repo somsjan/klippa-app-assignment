@@ -11,6 +11,9 @@ export class DocumentItemComponent {
   @Input()
   document: Partial<DocumentFinancialModel>;
 
+  @Input()
+  cssClass: '' | 'success' = '';
+
   constructor(
   ) {
   }

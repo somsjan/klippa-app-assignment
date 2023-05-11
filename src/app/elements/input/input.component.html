@@ -1,3 +1,3 @@
 <input class="form-control" [(ngModel)]="value" [placeholder]="placeholder"
-  [readOnly]="readonly" (input)="onChange.emit(value)"
+  [disabled]="disabled" (input)="onChange.emit(value)"
 >

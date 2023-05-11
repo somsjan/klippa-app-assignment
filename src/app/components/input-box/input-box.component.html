@@ -1,5 +1,5 @@
 <div class="input-box">
   <label>{{ labelText }}</label>
-  <app-input [value]="value" [placeholder]="labelText" [readonly]="readonly"
+  <app-input [value]="value" [placeholder]="labelText" [disabled]="disabled"
     (onChange)="onChange.emit($event)"></app-input>
 </div>

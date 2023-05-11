@@ -14,7 +14,7 @@ export class InputComponent {
   placeholder: string;
 
   @Input()
-  readonly: boolean = false;
+  disabled: boolean = false;
 
   @Output()
   onChange = new EventEmitter<any>;

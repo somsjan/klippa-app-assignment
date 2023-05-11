@@ -14,7 +14,7 @@ export class InputBoxComponent {
   value: string;
 
   @Input()
-  readonly: boolean;
+  disabled: boolean;
 
   @Output()
   onChange = new EventEmitter<any>();

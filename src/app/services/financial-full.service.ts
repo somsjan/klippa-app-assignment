@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ApiRequestOptions, BaseService } from "./base/base.service";
 import { HttpClient } from "@angular/common/http";
 import { LocalStorageKey, LocalStorageService } from "./utility/local-storage.service";
+import { DocumentFinancialModel } from "../models/document-financial.model";
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,7 @@ export class FinancialFullService extends BaseService {
     return data;
   }
 
-  public getHistory() {
+  public getHistory(): DocumentFinancialModel[] {
     return this.localStorageService.readStorage(this.localStorageKey);
   }
 
