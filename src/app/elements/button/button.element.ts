@@ -10,6 +10,9 @@ export class ButtonElement {
   @Input()
   text: string = '';
 
+  @Input()
+  disabled: boolean = false;
+
   @Output()
   readonly onClick = new EventEmitter<any>();
 

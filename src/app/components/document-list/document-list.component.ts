@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FinancialFullService } from "../../services/financialFull.service";
+import { LocalStorageKey, LocalStorageService } from "../../services/utility/local-storage.service";
 
 @Component({
   selector: 'app-document-list',
@@ -9,17 +9,17 @@ import { FinancialFullService } from "../../services/financialFull.service";
 export class DocumentListComponent {
 
   public isLoading: boolean = false;
-  public receiptList: any[] = [];
+  public documentHistory: any[] = [];
 
   constructor(
-    private parseDocumentService: FinancialFullService,
+    private localStorageService: LocalStorageService,
   ) {
-    this.getDocumentList();
+    this.getDocumentHistory();
   }
 
-  public async getDocumentList() {
+  public async getDocumentHistory() {
     this.isLoading = true;
-    await this.parseDocumentService.getReceipts();
+    this.documentHistory = this.localStorageService.readStorage(LocalStorageKey.FINANCIAL_DOCUMENT_HISTORY);
     this.isLoading = false;
   }
 

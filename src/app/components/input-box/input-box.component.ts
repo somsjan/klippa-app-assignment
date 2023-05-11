@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-box',
@@ -16,4 +16,6 @@ export class InputBoxComponent {
   @Input()
   readonly: boolean;
 
+  @Output()
+  onChange = new EventEmitter<any>();
 }

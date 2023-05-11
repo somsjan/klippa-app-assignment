@@ -1,13 +1,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 
-export class BaseService {
+export interface ApiRequestOptions {
+  apiKey: string;
+}
 
-  private readonly httpOptions = {
-    headers: new HttpHeaders({
-      'X-Auth-Key': environment.api.apiKey,
-    })
-  };
+export class BaseService {
 
   constructor(
     protected http: HttpClient,
@@ -15,21 +13,21 @@ export class BaseService {
 
   }
 
-  public postRequest(url: string, body: any): any {
+  public postRequest(url: string, body: any, options: ApiRequestOptions): any {
     try {
       const fullUrl = this.getFullEndpointUrl(url);
-      return this.http.post(fullUrl, body, this.httpOptions);
+      const requestOptions = this.getRequestOptions(options);
+      return this.http.post(fullUrl, body, requestOptions);
     } catch (e) {
       this.httpErrorHandler(e);
     }
   }
 
-  public getRequest(url: string): any {
-    try {
-      const fullUrl = this.getFullEndpointUrl(url);
-      return this.http.get(fullUrl, this.httpOptions);
-    } catch (e) {
-      this.httpErrorHandler(e);
+  private getRequestOptions(options: ApiRequestOptions) {
+    return {
+      headers: new HttpHeaders({
+        'X-Auth-Key': options.apiKey,
+      }),
     }
   }
 

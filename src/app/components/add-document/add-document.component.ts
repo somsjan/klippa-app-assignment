@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FinancialFullService } from "../../services/financialFull.service";
+import { Component } from '@angular/core';
+import { FinancialFullService } from "../../services/financial-full.service";
+import { DocumentFinancialModel } from "../../models/document-financial.model";
 
 @Component({
   selector: 'app-add-document',
@@ -8,11 +9,11 @@ import { FinancialFullService } from "../../services/financialFull.service";
 })
 export class AddDocumentComponent {
 
-  @Output()
-  readonly afterUpload = new EventEmitter();
-
-  public fileName = '';
   public selectedFile: File;
+  public uploadedFile: Partial<DocumentFinancialModel>;
+  public apiKey: string = '';
+
+  public isProcessing: boolean = false;
 
   constructor(
     private parseDocumentService: FinancialFullService,
@@ -20,17 +21,19 @@ export class AddDocumentComponent {
   }
 
   public onFileSelected(event) {
-    const file:File = event.target.files[0];
+    const selectedFile: File = event.target.files[0];
 
-    if (file) {
-      this.fileName = file.name;
-      this.selectedFile = file;
+    if (selectedFile) {
+      this.selectedFile = selectedFile;
+      this.uploadedFile = undefined;
     }
   }
 
   public async startUpload() {
-    await this.parseDocumentService.postDocument(this.selectedFile);
-    this.afterUpload.emit();
+    this.isProcessing = true;
+    this.uploadedFile = await this.parseDocumentService.postDocument(this.selectedFile, this.apiKey);
+    this.selectedFile = undefined;
+    this.isProcessing = false;
   }
 
 }

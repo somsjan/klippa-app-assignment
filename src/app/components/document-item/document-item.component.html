@@ -1,0 +1,22 @@
+<table>
+  <thead>
+  <tr>
+    <th>Document type</th>
+    <th>Amount</th>
+    <th>Currency</th>
+    <th>Payment method</th>
+    <th>Purchase date</th>
+    <th>Purchase time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{ document.parsed.document_type || 'NA' }}</td>
+    <td>{{ document.parsed.amount || 'NA' }}</td>
+    <td>{{ document.parsed.currency || 'NA' }}</td>
+    <td>{{ document.parsed.paymentmethod || 'NA' }}</td>
+    <td>{{ document.parsed.purchasedate || 'NA' }}</td>
+    <td>{{ document.parsed.purchasetime || 'NA' }}</td>
+  </tr>
+  </tbody>
+</table>

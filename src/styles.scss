@@ -4,6 +4,14 @@ body {
   margin : 0;
 }
 
+table {
+  width: 100%;
+
+  th {
+    text-align: start;
+  }
+}
+
 .form-control {
   font-size: 16px;
   width: 100%;
@@ -17,7 +25,6 @@ body {
     outline-color: $kl-green;
   }
 }
-
 
 .content-body-header {
   font-weight: normal;

@@ -1,8 +1,9 @@
-@import "../../theme/brand-colors";
+@import "../../../theme/brand-colors";
 
 .content-body {
   background-color: white;
   border-radius: 5px;
   padding: 20px;
+  margin-bottom: 1em;
   border: 1px solid $kl-border-color;
 }
