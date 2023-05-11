@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FinancialFullService } from "../../services/financial-full.service";
 import { DocumentFinancialModel } from "../../models/document-financial.model";
 
@@ -8,6 +8,9 @@ import { DocumentFinancialModel } from "../../models/document-financial.model";
   styleUrls: ['./add-document.component.scss']
 })
 export class AddDocumentComponent {
+
+  @Output()
+  refreshDocumentList = new EventEmitter();
 
   public selectedFile: File;
   public uploadFileResult: DocumentFinancialModel;
@@ -22,6 +25,10 @@ export class AddDocumentComponent {
 
   public onFileSelected(event) {
     const selectedFile: File = event.target.files[0];
+
+    if (this.uploadFileResult) {
+      this.refreshDocumentList.emit();
+    }
 
     if (selectedFile) {
       this.selectedFile = selectedFile;

@@ -3,7 +3,7 @@
   <app-content-header headerText="My Klippa"></app-content-header>
 
   <app-content-body>
-    <app-add-document (afterUpload)="documentList.getDocumentHistory()"></app-add-document>
+    <app-add-document (refreshDocumentList)="documentList.getDocumentHistory()"></app-add-document>
   </app-content-body>
 
   <app-content-body>
