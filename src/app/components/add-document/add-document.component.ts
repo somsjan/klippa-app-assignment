@@ -10,7 +10,7 @@ import { DocumentFinancialModel } from "../../models/document-financial.model";
 export class AddDocumentComponent {
 
   @Output()
-  refreshDocumentList = new EventEmitter();
+  onFileUploaded = new EventEmitter();
 
   public selectedFile: File;
   public uploadFileResult: DocumentFinancialModel;
@@ -27,7 +27,7 @@ export class AddDocumentComponent {
     const selectedFile: File = event.target.files[0];
 
     if (this.uploadFileResult) {
-      this.refreshDocumentList.emit();
+      this.onFileUploaded.emit();
     }
 
     if (selectedFile) {
